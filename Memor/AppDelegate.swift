@@ -10,18 +10,20 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-
-    @IBOutlet weak var window: NSWindow!
-
-
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
+        UserDefaults.standard.register(defaults: [
+            NotificationKey.confirmClearingItems: false,
+            NotificationKey.removeFavoritesWhenClearing: false,
+            NotificationKey.showCountInStatusItem: true,
+            NotificationKey.showItemsInStatusMenu: true,
+            NotificationKey.numberItemsInStatusMenu: "15"
+        ])
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
-
 
 }
 

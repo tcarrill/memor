@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
+            <connections>
+                <outlet property="delegate" destination="Voe-Tx-rLC" id="GzC-gU-4Uq"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application"/>
+        <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Memor" customModuleProvider="target"/>
+        <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
+        <customObject id="W10-F4-1ZT" customClass="StatusMenuController" customModule="Memor" customModuleProvider="target">
+            <connections>
+                <outlet property="statusMenu" destination="5Py-X4-gb9" id="9jT-cP-SAZ"/>
+            </connections>
+        </customObject>
+        <menu id="5Py-X4-gb9">
+            <items>
+                <menuItem title="Clear Items" keyEquivalent="c" id="o6d-4x-Q0a">
+                    <connections>
+                        <action selector="clearItemsClicked:" target="W10-F4-1ZT" id="0Vj-1V-N96"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="FOY-Lj-rbQ"/>
+                <menuItem isSeparatorItem="YES" id="plc-jX-ZMT"/>
+                <menuItem title="About Memor" id="vpk-iC-aeK">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="orderFrontStandardAboutPanel:" target="-1" id="u6j-ko-Mds"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Preferences…" id="WO6-PM-7h7">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="preferencesClicked:" target="W10-F4-1ZT" id="MNe-k5-gh8"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="nnq-L7-s3G"/>
+                <menuItem title="Quit" keyEquivalent="q" id="2Vg-Jb-abz">
+                    <connections>
+                        <action selector="quitClickedWithSender:" target="W10-F4-1ZT" id="WS0-9R-Jmt"/>
+                    </connections>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="61" y="68"/>
+        </menu>
+    </objects>
+</document>
