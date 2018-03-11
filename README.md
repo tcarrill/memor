@@ -1,5 +1,5 @@
-#Memor
-##Adjective
+# Memor
+## Adjective
 **memor** (*genitive* **memoris**); *third declension*
 
 1. mindful, remembering
