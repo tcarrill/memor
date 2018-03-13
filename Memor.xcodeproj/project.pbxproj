@@ -21,6 +21,9 @@
 		E9DA53D6204F76EE003263DA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DA53D5204F76EE003263DA /* Constants.swift */; };
 		E9DA53D920504B03003263DA /* PasteboardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DA53D820504B03003263DA /* PasteboardItem.swift */; };
 		E9DA53DC2050783B003263DA /* PasteboardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DA53DB2050783B003263DA /* PasteboardData.swift */; };
+		E9F00B4B2055B8C700E154BB /* PasteboardWindowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F00B4A2055B8C700E154BB /* PasteboardWindowViewModel.swift */; };
+		E9F00B4E2055B8E800E154BB /* PasteboardWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F00B4C2055B8E800E154BB /* PasteboardWindow.swift */; };
+		E9F00B4F2055B8E800E154BB /* PasteboardWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9F00B4D2055B8E800E154BB /* PasteboardWindow.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +44,9 @@
 		E9DA53D5204F76EE003263DA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E9DA53D820504B03003263DA /* PasteboardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteboardItem.swift; sourceTree = "<group>"; };
 		E9DA53DB2050783B003263DA /* PasteboardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteboardData.swift; sourceTree = "<group>"; };
+		E9F00B4A2055B8C700E154BB /* PasteboardWindowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteboardWindowViewModel.swift; sourceTree = "<group>"; };
+		E9F00B4C2055B8E800E154BB /* PasteboardWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteboardWindow.swift; sourceTree = "<group>"; };
+		E9F00B4D2055B8E800E154BB /* PasteboardWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PasteboardWindow.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				E9DA53D3204F6D5E003263DA /* StatusMenuViewModel.swift */,
+				E9F00B4A2055B8C700E154BB /* PasteboardWindowViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -121,6 +128,8 @@
 				E9DA53B42047898B003263DA /* StatusMenu.xib */,
 				E9DA53C920479FA7003263DA /* PreferencesWindow.swift */,
 				E9DA53CA20479FA7003263DA /* PreferencesWindow.xib */,
+				E9F00B4C2055B8E800E154BB /* PasteboardWindow.swift */,
+				E9F00B4D2055B8E800E154BB /* PasteboardWindow.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -194,6 +203,7 @@
 			files = (
 				E9DA53B32047898B003263DA /* Assets.xcassets in Resources */,
 				E9DA53CC20479FA7003263DA /* PreferencesWindow.xib in Resources */,
+				E9F00B4F2055B8E800E154BB /* PasteboardWindow.xib in Resources */,
 				E9DA53B62047898B003263DA /* StatusMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -208,10 +218,12 @@
 				E9A4D61020521FB10009F7A3 /* Observable.swift in Sources */,
 				E9DA53D1204AFF6E003263DA /* String+Truncate.swift in Sources */,
 				E9A4D60E20521F760009F7A3 /* Observer.swift in Sources */,
+				E9F00B4E2055B8E800E154BB /* PasteboardWindow.swift in Sources */,
 				E9DA53BF20478B77003263DA /* StatusMenuController.swift in Sources */,
 				E9DA53CB20479FA7003263DA /* PreferencesWindow.swift in Sources */,
 				E9DA53D920504B03003263DA /* PasteboardItem.swift in Sources */,
 				E9DA53D4204F6D5E003263DA /* StatusMenuViewModel.swift in Sources */,
+				E9F00B4B2055B8C700E154BB /* PasteboardWindowViewModel.swift in Sources */,
 				E9DA53D6204F76EE003263DA /* Constants.swift in Sources */,
 				E9DA53CE2049AD03003263DA /* PasteboardMonitor.swift in Sources */,
 				E9DA53B12047898B003263DA /* AppDelegate.swift in Sources */,

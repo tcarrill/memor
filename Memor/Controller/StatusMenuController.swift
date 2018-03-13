@@ -13,6 +13,7 @@ class StatusMenuController: NSObject, Observer {
     @IBOutlet weak var statusMenu: NSMenu!
 
     private var preferencesWindow: PreferencesWindow!
+    private var pasteboardWindow: PasteboardWindow!
     private var pasteboardMonitor: PasteboardMonitor!
     private var viewModel: StatusMenuViewModel!
     private var pasteMenuItems = [NSMenuItem]()
@@ -20,7 +21,7 @@ class StatusMenuController: NSObject, Observer {
     private let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     let pasteMenuItemStartIndex = 3
     private let attributes = [
-        NSAttributedStringKey.font: NSFont(name: "Avenir Next Bold", size: 15.0)!
+        NSAttributedStringKey.font: NSFont(name: "Avenir Next Bold", size: 14.0)!
     ]
     
     override init() {
@@ -30,6 +31,9 @@ class StatusMenuController: NSObject, Observer {
         pasteboardMonitor = PasteboardMonitor(pasteboardData: pasteboardData)
         viewModel = StatusMenuViewModel(pasteboardData: pasteboardData)
         viewModel.attach(observer: self)
+        
+        let pasteBoardWindowViewModel = PasteboardWindowViewModel(pasteboardData: pasteboardData)
+        pasteboardWindow = PasteboardWindow(viewModel: pasteBoardWindowViewModel)
         
         statusItem.attributedTitle = NSAttributedString(string: viewModel.statusItemTitle, attributes: attributes)
         statusItem.toolTip = viewModel.statusItemToolTip
@@ -47,7 +51,7 @@ class StatusMenuController: NSObject, Observer {
     // MARK: - UI Actions
     @IBAction func clearItemsClicked(_ sender: NSMenuItem) {
         if (UserDefaults.standard.bool(forKey: NotificationKey.confirmClearingItems)) {
-            let answer = dialogOKCancel(question: "Clear Items", text: "Do you want to clear all items in your copy history?")
+            let answer = dialogOKCancel(question: "Clear Items?", text: "All items in your copy history will be cleared.")
             if (answer) {
                 viewModel.clearItems()
             }
@@ -66,6 +70,7 @@ class StatusMenuController: NSObject, Observer {
 
     @objc private func summaryClicked(_ sender: NSMenuItem) {
         print("summaryClicked")
+        pasteboardWindow.showWindow(sender)
     }
     
     @objc private func itemClicked(_ sender: NSMenuItem) {

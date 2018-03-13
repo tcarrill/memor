@@ -8,12 +8,35 @@
 
 import Cocoa
 
-class PasteboardWindow: NSWindowController {
-
+class PasteboardWindow: NSWindowController, Observer {
+    
+    @IBOutlet weak var label: NSTextField!
+    
+    var viewModel: PasteboardWindowViewModel!
+    
+    override var windowNibName : NSNib.Name! {
+        return NSNib.Name(rawValue: "PasteboardWindow")
+    }
+    
     override func windowDidLoad() {
         super.windowDidLoad()
-
-        // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+        label.stringValue = viewModel.countSummary
+    }
+    
+    init(viewModel: PasteboardWindowViewModel) {
+        self.viewModel = viewModel
+        super.init(window: nil)
+        self.viewModel.attach(observer: self)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented, use init(viewModel:)")
+    }
+    
+    func update() {
+        if (label != nil) {
+            label.stringValue = viewModel.countSummary
+        }
     }
     
 }
