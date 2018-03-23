@@ -51,7 +51,11 @@ class StatusMenuController: NSObject, Observer {
     // MARK: - UI Actions
     @IBAction func clearItemsClicked(_ sender: NSMenuItem) {
         if (UserDefaults.standard.bool(forKey: NotificationKey.confirmClearingItems)) {
-            let answer = dialogOKCancel(question: "Clear Items?", text: "All items in your copy history will be cleared.")
+            var text = "All items in your copy history will be cleared."
+            if (UserDefaults.standard.bool(forKey: NotificationKey.removeFavoritesWhenClearing)) {
+                text = "All items, including favorites, in your copy history will be cleared."
+            }
+            let answer = dialogOKCancel(question: "Clear Items?", text: text)
             if (answer) {
                 viewModel.clearItems()
             }
@@ -69,7 +73,6 @@ class StatusMenuController: NSObject, Observer {
     }
 
     @objc private func summaryClicked(_ sender: NSMenuItem) {
-        print("summaryClicked")
         pasteboardWindow.showWindow(sender)
     }
     
