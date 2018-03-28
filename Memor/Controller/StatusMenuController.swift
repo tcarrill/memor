@@ -14,7 +14,6 @@ class StatusMenuController: NSObject, Observer {
 
     private var preferencesWindow: PreferencesWindow!
     private var pasteboardWindow: PasteboardWindow!
-    private var pasteboardMonitor: PasteboardMonitor!
     private var viewModel: StatusMenuViewModel!
     private var pasteMenuItems = [NSMenuItem]()
 
@@ -26,26 +25,30 @@ class StatusMenuController: NSObject, Observer {
     
     override init() {
         super.init()
-        preferencesWindow = PreferencesWindow()
-        let pasteboardData = PasteboardData()
-        pasteboardMonitor = PasteboardMonitor(pasteboardData: pasteboardData)
-        viewModel = StatusMenuViewModel(pasteboardData: pasteboardData)
-        viewModel.attach(observer: self)
-        
-        let pasteBoardWindowViewModel = PasteboardWindowViewModel(pasteboardData: pasteboardData)
-        pasteboardWindow = PasteboardWindow(viewModel: pasteBoardWindowViewModel)
-        
-        statusItem.attributedTitle = NSAttributedString(string: viewModel.statusItemTitle, attributes: attributes)
-        statusItem.toolTip = viewModel.statusItemToolTip
+    
+        print("StatusMenuController init()")
     }
     
     override func awakeFromNib() {
+        let appDelegate = NSApplication.shared.delegate as! AppDelegate
+        let pasteboardData = appDelegate.getPasteboardData()
+        
+        viewModel = StatusMenuViewModel(pasteboardData: pasteboardData)
+        viewModel.attach(observer: self)
+        
         let summaryMenuItem = NSMenuItem(title: viewModel.countSummary,
                                   action: #selector(summaryClicked(_:)),
                                   keyEquivalent: "")
         summaryMenuItem.target = self
         statusMenu.insertItem(summaryMenuItem, at: 0)
         statusItem.menu = statusMenu
+        
+        let pasteBoardWindowViewModel = PasteboardWindowViewModel(pasteboardData: pasteboardData)
+        pasteboardWindow = PasteboardWindow(viewModel: pasteBoardWindowViewModel)
+        preferencesWindow = PreferencesWindow()
+        
+        statusItem.attributedTitle = NSAttributedString(string: viewModel.statusItemTitle, attributes: attributes)
+        statusItem.toolTip = viewModel.statusItemToolTip
     }
     
     // MARK: - UI Actions

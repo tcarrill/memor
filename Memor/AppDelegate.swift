@@ -10,7 +10,9 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-    
+    let pasteboardData = PasteboardData()
+    private var pasteboardMonitor: PasteboardMonitor!
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         UserDefaults.standard.register(defaults: [
             NotificationKey.confirmClearingItems: false,
@@ -19,11 +21,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             NotificationKey.showItemsInStatusMenu: true,
             NotificationKey.numberItemsInStatusMenu: "15"
         ])
+        
+        if let ourData = NSKeyedUnarchiver.unarchiveObject(withFile: NSHomeDirectory() + "savedItems.memor") as? [PasteboardItem] {
+            pasteboardData.items = ourData
+        }
+        
+        pasteboardMonitor = PasteboardMonitor(pasteboardData: pasteboardData)
+
+        print("Application did finish launching")
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
+        print("Application will terminate")
+        print(NSKeyedArchiver.archiveRootObject(pasteboardData.items, toFile: NSHomeDirectory() + "savedItems.memor"))
     }
-
+    
+    func getPasteboardData() -> PasteboardData {
+        return pasteboardData
+    }
+    
 }
 

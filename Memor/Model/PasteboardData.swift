@@ -45,7 +45,6 @@ class PasteboardData: NSObject, Observable {
     }
     
     func detach(observer: Observer) {
-       
     }
     
     func notify() {
