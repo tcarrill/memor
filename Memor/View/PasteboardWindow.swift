@@ -51,11 +51,12 @@ class PasteboardWindow: NSWindowController, Observer {
     }
     
     override func keyDown(with event: NSEvent) {
-        if (event.keyCode == 123) {
+        print(event.keyCode)
+        if (event.keyCode == 123) { // Left arrow
             viewModel.decrementPasteboardIndex()
-        } else if (event.keyCode == 124) {
+        } else if (event.keyCode == 124) { // Right arrow
             viewModel.incrementPasteboardIndex()
-        } else if (event.keyCode == 3) {
+        } else if (event.keyCode == 3) { // f: Favorite item
             viewModel.toggleFavoriteForCurrentItem()
         }
         label.stringValue = viewModel.countSummary

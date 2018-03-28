@@ -20,6 +20,10 @@ class PasteboardWindowViewModel: NSObject, Observer, Observable {
         self.pasteboardData.attach(observer: self)
     }
     
+    func deleteCurrentItem() {
+       
+    }
+    
     func decrementPasteboardIndex() {
         pasteboardIndex -= 1
         if (pasteboardIndex < 0) {
