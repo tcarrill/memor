@@ -22,8 +22,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             NotificationKey.numberItemsInStatusMenu: "15"
         ])
         
-        if let ourData = NSKeyedUnarchiver.unarchiveObject(withFile: NSHomeDirectory() + "savedItems.memor") as? [PasteboardItem] {
-            pasteboardData.items = ourData
+        if let ourData = NSKeyedUnarchiver.unarchiveObject(withFile: NSHomeDirectory() + "/savedItems.memor") as? [PasteboardItem] {
+            pasteboardData.loadSavedItems(items: ourData)
         }
         
         pasteboardMonitor = PasteboardMonitor(pasteboardData: pasteboardData)
@@ -33,7 +33,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationWillTerminate(_ aNotification: Notification) {
         print("Application will terminate")
-        print(NSKeyedArchiver.archiveRootObject(pasteboardData.items, toFile: NSHomeDirectory() + "savedItems.memor"))
+        print(NSKeyedArchiver.archiveRootObject(pasteboardData.items, toFile: NSHomeDirectory() + "/savedItems.memor"))
     }
     
     func getPasteboardData() -> PasteboardData {
