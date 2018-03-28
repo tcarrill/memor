@@ -17,6 +17,11 @@ class PasteboardData: NSObject, Observable {
         notify()
     }
     
+    func loadSavedItems(items: [PasteboardItem]) {
+        self.items = items
+        notify()
+    }
+    
     func getNItems(n: Int) -> [PasteboardItem] {
         var topN = [PasteboardItem]()
         if (!items.isEmpty) {
@@ -50,7 +55,6 @@ class PasteboardData: NSObject, Observable {
     }
     
     func detach(observer: Observer) {
-       
     }
     
     func notify() {
