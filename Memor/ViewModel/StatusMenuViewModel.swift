@@ -118,7 +118,12 @@ class StatusMenuViewModel: NSObject, Observer, Observable {
     }
     
     func detach(observer: Observer) {
-   
+        for i in 0 ..< observers.count {
+            if observers[i] === observer {
+                observers.remove(at: i)
+                break
+            }
+        }
     }
     
     func notify() {

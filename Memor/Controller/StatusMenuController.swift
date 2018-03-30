@@ -23,12 +23,6 @@ class StatusMenuController: NSObject, Observer {
         NSAttributedStringKey.font: NSFont(name: "Avenir Next Bold", size: 14.0)!
     ]
     
-    override init() {
-        super.init()
-    
-        print("StatusMenuController init()")
-    }
-    
     override func awakeFromNib() {
         let appDelegate = NSApplication.shared.delegate as! AppDelegate
         let pasteboardData = appDelegate.getPasteboardData()

@@ -58,6 +58,8 @@ class PasteboardWindow: NSWindowController, Observer {
             viewModel.incrementPasteboardIndex()
         } else if (event.keyCode == 3) { // f: Favorite item
             viewModel.toggleFavoriteForCurrentItem()
+        } else if (event.keyCode == 51) { // delete: Delete item
+            viewModel.deleteCurrentItem()
         }
         label.stringValue = viewModel.countSummary
         itemLabel.stringValue = viewModel.getCurrentItem()

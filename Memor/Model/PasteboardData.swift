@@ -35,6 +35,11 @@ class PasteboardData: NSObject, Observable {
         return topN
     }
     
+    func deleteItem(index: Int) {
+        items.remove(at: index)
+        notify()
+    }
+    
     func clearAllItems() {
         items.removeAll()
         notify()
@@ -50,11 +55,19 @@ class PasteboardData: NSObject, Observable {
         notify()
     }
     
+    // MARK: - Observable
+    
     func attach(observer: Observer) {
         observers.append(observer)
     }
     
     func detach(observer: Observer) {
+        for i in 0 ..< observers.count {
+            if observers[i] === observer {
+                observers.remove(at: i)
+                break
+            }
+        }
     }
     
     func notify() {
