@@ -16,8 +16,3 @@ struct NotificationKey {
     static let numberItemsInStatusMenu = "numberItemsInStatusMenu"
     static let pasteboardChangeCount = "pasteboardChangeKey"
 }
-
-struct UserInfo {
-    static let count = "count"
-    static let text = "text"
-}

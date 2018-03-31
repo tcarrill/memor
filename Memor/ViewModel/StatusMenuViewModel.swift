@@ -67,8 +67,12 @@ class StatusMenuViewModel: NSObject, Observer, Observable {
         menuItemTitles.removeAll()
         
         for item in items {
-            let shortTitle = item.text.trimmingCharacters(in: .whitespacesAndNewlines).truncate(length: 50)
-            menuItemTitles.insert(shortTitle, at: 0)
+            var title = item.text
+            if (item.favorite) {
+                title = "❤ " + title
+            }
+            title = title.trimmingCharacters(in: .whitespacesAndNewlines).truncate(length: 50)
+            menuItemTitles.insert(title, at: 0)
         }
     }
     
@@ -91,8 +95,12 @@ class StatusMenuViewModel: NSObject, Observer, Observable {
         notify()
     }
     
-    func clearItems() {
+    func clearAllItems() {
         pasteboardData.clearAllItems()
+    }
+    
+    func clearItems() {
+        pasteboardData.clearItems()
     }
     
     // MARK: - Observer protocol
@@ -110,7 +118,12 @@ class StatusMenuViewModel: NSObject, Observer, Observable {
     }
     
     func detach(observer: Observer) {
-   
+        for i in 0 ..< observers.count {
+            if observers[i] === observer {
+                observers.remove(at: i)
+                break
+            }
+        }
     }
     
     func notify() {

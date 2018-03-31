@@ -35,21 +35,39 @@ class PasteboardData: NSObject, Observable {
         return topN
     }
     
+    func deleteItem(index: Int) {
+        items.remove(at: index)
+        notify()
+    }
+    
     func clearAllItems() {
         items.removeAll()
         notify()
     }
     
-    func clearNonFavoriteItems() {
-        let removableItems = items.filter { $0.favorite == false }
+    func clearItems() {
+//        let removableItems = items.filter { $0.favorite == false }
         notify()
     }
+    
+    func toggleFavorite(index: Int) {
+        items[index].favorite = !items[index].favorite
+        notify()
+    }
+    
+    // MARK: - Observable
     
     func attach(observer: Observer) {
         observers.append(observer)
     }
     
     func detach(observer: Observer) {
+        for i in 0 ..< observers.count {
+            if observers[i] === observer {
+                observers.remove(at: i)
+                break
+            }
+        }
     }
     
     func notify() {

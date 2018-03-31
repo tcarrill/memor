@@ -23,12 +23,6 @@ class StatusMenuController: NSObject, Observer {
         NSAttributedStringKey.font: NSFont(name: "Avenir Next Bold", size: 14.0)!
     ]
     
-    override init() {
-        super.init()
-    
-        print("StatusMenuController init()")
-    }
-    
     override func awakeFromNib() {
         let appDelegate = NSApplication.shared.delegate as! AppDelegate
         let pasteboardData = appDelegate.getPasteboardData()
@@ -54,7 +48,11 @@ class StatusMenuController: NSObject, Observer {
     // MARK: - UI Actions
     @IBAction func clearItemsClicked(_ sender: NSMenuItem) {
         if (UserDefaults.standard.bool(forKey: NotificationKey.confirmClearingItems)) {
-            let answer = dialogOKCancel(question: "Clear Items?", text: "All items in your copy history will be cleared.")
+            var text = "All items in your copy history will be cleared."
+            if (UserDefaults.standard.bool(forKey: NotificationKey.removeFavoritesWhenClearing)) {
+                text = "All items, including favorites, in your copy history will be cleared."
+            }
+            let answer = dialogOKCancel(question: "Clear Items?", text: text)
             if (answer) {
                 viewModel.clearItems()
             }
@@ -72,7 +70,6 @@ class StatusMenuController: NSObject, Observer {
     }
 
     @objc private func summaryClicked(_ sender: NSMenuItem) {
-        print("summaryClicked")
         pasteboardWindow.showWindow(sender)
     }
     
