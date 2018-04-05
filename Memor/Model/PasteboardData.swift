@@ -46,7 +46,7 @@ class PasteboardData: NSObject, Observable {
     }
     
     func clearItems() {
-//        let removableItems = items.filter { $0.favorite == false }
+        items = items.filter { $0.favorite != false }
         notify()
     }
     

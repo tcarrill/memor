@@ -47,17 +47,26 @@ class StatusMenuController: NSObject, Observer {
     
     // MARK: - UI Actions
     @IBAction func clearItemsClicked(_ sender: NSMenuItem) {
+        let removeFavorites = UserDefaults.standard.bool(forKey: NotificationKey.removeFavoritesWhenClearing)
         if (UserDefaults.standard.bool(forKey: NotificationKey.confirmClearingItems)) {
             var text = "All items in your copy history will be cleared."
-            if (UserDefaults.standard.bool(forKey: NotificationKey.removeFavoritesWhenClearing)) {
+            if (removeFavorites) {
                 text = "All items, including favorites, in your copy history will be cleared."
             }
             let answer = dialogOKCancel(question: "Clear Items?", text: text)
             if (answer) {
-                viewModel.clearItems()
+                if (removeFavorites) {
+                    viewModel.clearAllItems()
+                } else {
+                    viewModel.clearItems()
+                }
             }
         } else {
-            viewModel.clearItems()
+            if (removeFavorites) {
+                viewModel.clearAllItems()
+            } else {
+                viewModel.clearItems()
+            }
         }
     }
     

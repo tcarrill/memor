@@ -21,7 +21,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             NotificationKey.removeFavoritesWhenClearing: false,
             NotificationKey.showCountInStatusItem: true,
             NotificationKey.showItemsInStatusMenu: true,
-            NotificationKey.numberItemsInStatusMenu: "15"
+            NotificationKey.numberItemsInStatusMenu: "15",
+            NotificationKey.favoriteIcon: "♥"
         ])
         
         if let savedData = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [PasteboardItem] {

@@ -17,7 +17,24 @@ class PasteboardWindowViewModel: NSObject, Observer, Observable {
         self.pasteboardData = pasteboardData
         self.pasteboardIndex = 0
         super.init()
+        UserDefaults.standard.addObserver(self,
+                                          forKeyPath: NotificationKey.favoriteIcon,
+                                          options: NSKeyValueObservingOptions.new,
+                                          context: nil)
         self.pasteboardData.attach(observer: self)
+    }
+    
+    deinit {
+        UserDefaults.standard.removeObserver(self, forKeyPath: NotificationKey.favoriteIcon)
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?,
+                               of object: Any?,
+                               change: [NSKeyValueChangeKey : Any]?,
+                               context: UnsafeMutableRawPointer?) {
+        if (keyPath == NotificationKey.favoriteIcon) {
+            notify()
+        }
     }
     
     func deleteCurrentItem() {
@@ -42,7 +59,7 @@ class PasteboardWindowViewModel: NSObject, Observer, Observable {
         let displayIndex = pasteboardData.items.count == 0 ? pasteboardIndex : pasteboardIndex + 1
         var summary = "\(displayIndex) of \(pasteboardData.items.count)"
         if (pasteboardData.items.count > 0 && pasteboardData.items[pasteboardIndex].favorite) {
-            summary = summary + " ❤"
+            summary = summary + " " + UserDefaults.standard.string(forKey: NotificationKey.favoriteIcon)!
         }
         return summary
     }

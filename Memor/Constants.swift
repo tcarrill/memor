@@ -14,5 +14,6 @@ struct NotificationKey {
     static let showCountInStatusItem = "showCountInStatusItem"
     static let showItemsInStatusMenu = "showItemsInStatusMenu"
     static let numberItemsInStatusMenu = "numberItemsInStatusMenu"
+    static let favoriteIcon = "favoriteIcon"
     static let pasteboardChangeCount = "pasteboardChangeKey"
 }

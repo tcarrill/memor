@@ -32,6 +32,10 @@ class StatusMenuViewModel: NSObject, Observer, Observable {
                                           forKeyPath: NotificationKey.showItemsInStatusMenu,
                                           options: NSKeyValueObservingOptions.new,
                                           context: nil)
+        UserDefaults.standard.addObserver(self,
+                                          forKeyPath: NotificationKey.favoriteIcon,
+                                          options: NSKeyValueObservingOptions.new,
+                                          context: nil)
         pasteboardData.attach(observer: self)
     }
     
@@ -39,6 +43,7 @@ class StatusMenuViewModel: NSObject, Observer, Observable {
         UserDefaults.standard.removeObserver(self, forKeyPath: NotificationKey.showCountInStatusItem)
         UserDefaults.standard.removeObserver(self, forKeyPath: NotificationKey.numberItemsInStatusMenu)
         UserDefaults.standard.removeObserver(self, forKeyPath: NotificationKey.showItemsInStatusMenu)
+        UserDefaults.standard.removeObserver(self, forKeyPath: NotificationKey.favoriteIcon)
     }
     
     var countSummary: String {
@@ -69,7 +74,7 @@ class StatusMenuViewModel: NSObject, Observer, Observable {
         for item in items {
             var title = item.text
             if (item.favorite) {
-                title = "❤ " + title
+                title = UserDefaults.standard.string(forKey: NotificationKey.favoriteIcon)! + " " + title
             }
             title = title.trimmingCharacters(in: .whitespacesAndNewlines).truncate(length: 50)
             menuItemTitles.insert(title, at: 0)
@@ -90,6 +95,8 @@ class StatusMenuViewModel: NSObject, Observer, Observable {
             } else {
                 updateMenuItemTitles()
             }
+        } else if (keyPath == NotificationKey.favoriteIcon) {
+            updateMenuItemTitles()
         }
         
         notify()

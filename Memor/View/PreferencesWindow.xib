@@ -104,40 +104,40 @@
                         </view>
                     </box>
                     <box fixedFrame="YES" title="Appearance" translatesAutoresizingMaskIntoConstraints="NO" id="mug-bq-DJf">
-                        <rect key="frame" x="17" y="64" width="411" height="87"/>
+                        <rect key="frame" x="17" y="71" width="411" height="80"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <view key="contentView" id="K9B-pY-Oob">
-                            <rect key="frame" x="2" y="2" width="407" height="70"/>
+                            <rect key="frame" x="2" y="2" width="407" height="63"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <colorWell fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TJ4-RP-ppl">
-                                    <rect key="frame" x="115" y="27" width="44" height="23"/>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HUM-eX-s7v">
+                                    <rect key="frame" x="20" y="26" width="82" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <color key="color" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </colorWell>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QjC-df-RLX">
-                                    <rect key="frame" x="18" y="30" width="91" height="17"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Window color:" id="qFz-pt-o6T">
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Favorite icon" id="tKJ-Wi-oL8">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jyr-9B-fw8">
-                                    <rect key="frame" x="183" y="30" width="68" height="17"/>
+                                <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NNd-4X-CTB">
+                                    <rect key="frame" x="109" y="21" width="74" height="26"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Text color:" id="bWl-jg-O8R">
+                                    <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="h66-hp-gvq">
                                         <font key="font" metaFont="system"/>
-                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                    </textFieldCell>
-                                </textField>
-                                <colorWell fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UD8-xb-ukG">
-                                    <rect key="frame" x="257" y="24" width="44" height="23"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </colorWell>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        <objectValues>
+                                            <string>♥</string>
+                                            <string>★</string>
+                                            <string>✹</string>
+                                            <string>◆</string>
+                                            <string>♠</string>
+                                        </objectValues>
+                                    </comboBoxCell>
+                                    <connections>
+                                        <binding destination="udS-KF-bXv" name="value" keyPath="values.favoriteIcon" id="Ajc-EJ-GKp"/>
+                                    </connections>
+                                </comboBox>
                             </subviews>
                         </view>
                     </box>
