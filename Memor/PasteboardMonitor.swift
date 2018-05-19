@@ -11,7 +11,6 @@ import AppKit
 
 class PasteboardMonitor {
     private let pasteboard = NSPasteboard.general
-    private var previousChangeCount = NSPasteboard.general.changeCount
     private var pasteboardData: PasteboardData
     
     init(pasteboardData: PasteboardData) {
@@ -24,8 +23,8 @@ class PasteboardMonitor {
     }
     
     @objc private func poll() {
-        if (pasteboard.changeCount != previousChangeCount) {
-            previousChangeCount = pasteboard.changeCount
+        if (pasteboard.changeCount != pasteboardData.previousChangeCount) {
+            pasteboardData.previousChangeCount = pasteboard.changeCount
             let text = pasteboard.pasteboardItems![0].string(forType: NSPasteboard.PasteboardType(rawValue: "public.utf8-plain-text"))!
             pasteboardData.insert(text: text)
         }

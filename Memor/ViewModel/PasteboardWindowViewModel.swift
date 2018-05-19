@@ -38,7 +38,11 @@ class PasteboardWindowViewModel: NSObject, Observer, Observable {
     }
     
     func deleteCurrentItem() {
-        pasteboardData.deleteItem(index: pasteboardIndex)
+        let oldIndex = pasteboardIndex
+        if (pasteboardIndex == pasteboardData.items.count - 1) {
+                pasteboardIndex -= 1
+        }
+        pasteboardData.deleteItem(index: oldIndex)
     }
     
     func decrementPasteboardIndex() {

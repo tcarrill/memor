@@ -9,8 +9,14 @@
 import Foundation
 
 class PasteboardData: NSObject, Observable {
+    var previousChangeCount: Int
     var items = [PasteboardItem]()
     var observers = [Observer]()
+    var favoriteCount = 0;
+    
+    init(changeCount: Int) {
+        previousChangeCount = changeCount
+    }
     
     func insert(text: String) {
         items.insert(PasteboardItem(text: text, favorite: false), at: 0)
@@ -19,6 +25,11 @@ class PasteboardData: NSObject, Observable {
     
     func loadSavedItems(items: [PasteboardItem]) {
         self.items = items
+        for item in self.items {
+            if (item.favorite) {
+                favoriteCount += 1
+            }
+        }
         notify()
     }
     
@@ -36,7 +47,10 @@ class PasteboardData: NSObject, Observable {
     }
     
     func deleteItem(index: Int) {
-        items.remove(at: index)
+        let item = items.remove(at: index)
+        if (item.favorite) {
+            favoriteCount -= 1
+        }
         notify()
     }
     
@@ -52,6 +66,7 @@ class PasteboardData: NSObject, Observable {
     
     func toggleFavorite(index: Int) {
         items[index].favorite = !items[index].favorite
+        favoriteCount += items[index].favorite ? 1 : -1
         notify()
     }
     

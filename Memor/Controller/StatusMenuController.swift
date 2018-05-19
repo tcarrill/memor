@@ -5,7 +5,7 @@
 //  Created by Thomas Carrill on 2/28/18.
 //  Copyright © 2018 devcellar. All rights reserved.
 //
-
+import AppKit
 import Cocoa
 
 class StatusMenuController: NSObject, Observer {
@@ -16,7 +16,8 @@ class StatusMenuController: NSObject, Observer {
     private var pasteboardWindow: PasteboardWindow!
     private var viewModel: StatusMenuViewModel!
     private var pasteMenuItems = [NSMenuItem]()
-
+    private var pasteboardData: PasteboardData!
+    
     private let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     let pasteMenuItemStartIndex = 3
     private let attributes = [
@@ -25,7 +26,7 @@ class StatusMenuController: NSObject, Observer {
     
     override func awakeFromNib() {
         let appDelegate = NSApplication.shared.delegate as! AppDelegate
-        let pasteboardData = appDelegate.getPasteboardData()
+        pasteboardData = appDelegate.getPasteboardData()
         
         viewModel = StatusMenuViewModel(pasteboardData: pasteboardData)
         viewModel.attach(observer: self)
@@ -83,16 +84,41 @@ class StatusMenuController: NSObject, Observer {
     }
     
     @objc private func itemClicked(_ sender: NSMenuItem) {
-        print("itemClicked: " + sender.title)
+        let item = pasteboardData.items[sender.tag]
+        let pb = NSPasteboard.init(name: NSPasteboard.Name.general)
+        
+        pb.string(forType: NSPasteboard.PasteboardType.string)
+        pb.declareTypes([NSPasteboard.PasteboardType.string], owner: nil)
+        
+        if (pb.setString(item.text, forType: NSPasteboard.PasteboardType.string)) {
+            pasteboardData.previousChangeCount = pb.changeCount
+            
+            let src = CGEventSource(stateID: CGEventSourceStateID.hidSystemState)
+            
+            let cmdd = CGEvent(keyboardEventSource: src, virtualKey: 37, keyDown: true)
+            let cmdu = CGEvent(keyboardEventSource: src, virtualKey: 37, keyDown: false)
+            let spcd = CGEvent(keyboardEventSource: src, virtualKey: 9, keyDown: true)
+            let spcu = CGEvent(keyboardEventSource: src, virtualKey: 9, keyDown: false)
+            
+            spcd?.flags = CGEventFlags.maskCommand;
+            
+//            let loc = CGEventTapLocation.cghidEventTap
+            
+            cmdd?.post(tap: .cghidEventTap)
+            spcd?.post(tap: .cghidEventTap)
+            spcu?.post(tap: .cghidEventTap)
+            cmdu?.post(tap: .cghidEventTap)
+        }
     }
     
     // MARK: -
-    
-    private func createMenuItem(title: String) -> NSMenuItem {
+
+    private func createMenuItem(title: String, tag: Int) -> NSMenuItem {
         let menuItem = NSMenuItem(title: title,
                                   action: #selector(itemClicked(_:)),
                                   keyEquivalent: "")
         menuItem.target = self
+        menuItem.tag = tag
         pasteMenuItems.append(menuItem)
         return menuItem
     }
@@ -103,10 +129,12 @@ class StatusMenuController: NSObject, Observer {
         }
         pasteMenuItems.removeAll()
     }
-    
+
     private func updatePasteboardMenuItems() {
+        var i = viewModel.menuItemTitles.count - 1
         for item in viewModel.menuItemTitles {
-            statusItem.menu?.insertItem(createMenuItem(title: item), at: pasteMenuItemStartIndex)
+            statusItem.menu?.insertItem(createMenuItem(title: item, tag: i), at: pasteMenuItemStartIndex)
+            i -= 1
         }
     }
     

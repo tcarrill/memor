@@ -6,11 +6,12 @@
 //  Copyright © 2018 devcellar. All rights reserved.
 //
 
+import AppKit
 import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-    let pasteboardData = PasteboardData()
+    let pasteboardData = PasteboardData(changeCount: NSPasteboard.general.changeCount)
     let filePath = NSHomeDirectory() + "/savedItems.memor"
     
     private var pasteboardMonitor: PasteboardMonitor!
@@ -39,6 +40,4 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func getPasteboardData() -> PasteboardData {
         return pasteboardData
     }
-    
 }
-

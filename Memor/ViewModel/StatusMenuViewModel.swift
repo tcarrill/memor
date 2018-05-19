@@ -51,6 +51,11 @@ class StatusMenuViewModel: NSObject, Observer, Observable {
         if (pasteboardData.items.count != 1) {
             countSummary = countSummary + "s"
         }
+        
+        countSummary = countSummary + ", " + String(describing: pasteboardData.favoriteCount) + " Favorite"
+        if (pasteboardData.favoriteCount != 1) {
+            countSummary = countSummary + "s"
+        }
         return countSummary
     }
     
