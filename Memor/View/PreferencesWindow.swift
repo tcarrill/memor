@@ -11,7 +11,7 @@ import Cocoa
 class PreferencesWindow: NSWindowController {
     
     override var windowNibName : NSNib.Name! {
-        return NSNib.Name(rawValue: "PreferencesWindow")
+        return NSNib.Name("PreferencesWindow")
     }
     
     override func showWindow(_ sender: Any?) {

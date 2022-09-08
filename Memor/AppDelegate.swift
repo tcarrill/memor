@@ -7,9 +7,16 @@
 //
 
 import Cocoa
+import KeyboardShortcuts
+
+extension KeyboardShortcuts.Name {
+  // **NOTE**: It is not recommended to set a default keyboard shortcut. Instead opt to show a setup on first app-launch to let the user define a shortcut, default shortcut: command+shift+return
+  static let showFloatingPanel = Self("showFloatingPanel", default: .init(.return, modifiers: [.command, .shift]))
+}
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
+    private var pasteboardWindow = PasteboardWindow()
     let pasteboardData = PasteboardData()
     let filePath = NSHomeDirectory() + "/savedItems.memor"
     
@@ -28,7 +35,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             pasteboardData.loadSavedItems(items: savedData)
         }
         
+        let pasteBoardWindowViewModel = PasteboardWindowViewModel(pasteboardData: pasteboardData)
+        pasteboardWindow.setup(viewModel: pasteBoardWindowViewModel)
+        
         pasteboardMonitor = PasteboardMonitor(pasteboardData: pasteboardData)
+        
+        KeyboardShortcuts.onKeyUp(for: .showFloatingPanel, action: {
+            self.pasteboardWindow.showWindow(nil)
+        })
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -37,6 +51,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func getPasteboardData() -> PasteboardData {
         return pasteboardData
+    }
+    
+    func getPasteboardWindow() -> PasteboardWindow {
+        return pasteboardWindow
     }
     
 }

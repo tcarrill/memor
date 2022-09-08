@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E99F7DD228C6333A0062962C /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = E99F7DD128C6333A0062962C /* KeyboardShortcuts */; };
 		E9A4D60E20521F760009F7A3 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A4D60D20521F760009F7A3 /* Observer.swift */; };
 		E9A4D61020521FB10009F7A3 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A4D60F20521FB10009F7A3 /* Observable.swift */; };
 		E9DA53B12047898B003263DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DA53B02047898B003263DA /* AppDelegate.swift */; };
@@ -54,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E99F7DD228C6333A0062962C /* KeyboardShortcuts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,6 +160,9 @@
 			dependencies = (
 			);
 			name = Memor;
+			packageProductDependencies = (
+				E99F7DD128C6333A0062962C /* KeyboardShortcuts */,
+			);
 			productName = Memor;
 			productReference = E9DA53AD2047898B003263DA /* Memor.app */;
 			productType = "com.apple.product-type.application";
@@ -188,6 +193,9 @@
 				Base,
 			);
 			mainGroup = E9DA53A42047898B003263DA;
+			packageReferences = (
+				E99F7DD028C6333A0062962C /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
+			);
 			productRefGroup = E9DA53AE2047898B003263DA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -354,7 +362,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;
 		};
@@ -368,7 +377,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = CY4C756H24;
 				INFOPLIST_FILE = Memor/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.devcellar.Memor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -385,7 +397,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = CY4C756H24;
 				INFOPLIST_FILE = Memor/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.devcellar.Memor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -414,6 +429,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E99F7DD028C6333A0062962C /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/KeyboardShortcuts";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E99F7DD128C6333A0062962C /* KeyboardShortcuts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E99F7DD028C6333A0062962C /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */;
+			productName = KeyboardShortcuts;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E9DA53A52047898B003263DA /* Project object */;
 }

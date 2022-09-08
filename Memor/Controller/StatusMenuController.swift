@@ -20,12 +20,13 @@ class StatusMenuController: NSObject, Observer {
     private let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     let pasteMenuItemStartIndex = 3
     private let attributes = [
-        NSAttributedStringKey.font: NSFont(name: "Avenir Next Bold", size: 14.0)!
+        NSAttributedString.Key.font: NSFont(name: "Avenir Next Bold", size: 14.0)!
     ]
     
     override func awakeFromNib() {
         let appDelegate = NSApplication.shared.delegate as! AppDelegate
         let pasteboardData = appDelegate.getPasteboardData()
+        pasteboardWindow = appDelegate.getPasteboardWindow()
         
         viewModel = StatusMenuViewModel(pasteboardData: pasteboardData)
         viewModel.attach(observer: self)
@@ -37,8 +38,6 @@ class StatusMenuController: NSObject, Observer {
         statusMenu.insertItem(summaryMenuItem, at: 0)
         statusItem.menu = statusMenu
         
-        let pasteBoardWindowViewModel = PasteboardWindowViewModel(pasteboardData: pasteboardData)
-        pasteboardWindow = PasteboardWindow(viewModel: pasteBoardWindowViewModel)
         preferencesWindow = PreferencesWindow()
         
         statusItem.attributedTitle = NSAttributedString(string: viewModel.statusItemTitle, attributes: attributes)
@@ -54,10 +53,10 @@ class StatusMenuController: NSObject, Observer {
             }
             let answer = dialogOKCancel(question: "Clear Items?", text: text)
             if (answer) {
-                viewModel.clearItems()
+                viewModel.clearAllItems()
             }
         } else {
-            viewModel.clearItems()
+            viewModel.clearAllItems()
         }
     }
     

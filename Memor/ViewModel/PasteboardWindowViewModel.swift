@@ -4,7 +4,6 @@
 //
 //  Created by Thomas Carrill on 3/11/18.
 //  Copyright © 2018 devcellar. All rights reserved.
-//  test
 
 import Foundation
 
@@ -22,6 +21,9 @@ class PasteboardWindowViewModel: NSObject, Observer, Observable {
     
     func deleteCurrentItem() {
         pasteboardData.deleteItem(index: pasteboardIndex)
+        if (pasteboardIndex == pasteboardData.items.count) {
+            pasteboardIndex -= 1
+        }
     }
     
     func decrementPasteboardIndex() {
@@ -39,7 +41,7 @@ class PasteboardWindowViewModel: NSObject, Observer, Observable {
     }
     
     var countSummary: String {
-        let displayIndex = pasteboardData.items.count == 0 ? pasteboardIndex : pasteboardIndex + 1
+        let displayIndex = pasteboardData.items.count == 0 ? 0 : pasteboardIndex + 1
         var summary = "\(displayIndex) of \(pasteboardData.items.count)"
         if (pasteboardData.items.count > 0 && pasteboardData.items[pasteboardIndex].favorite) {
             summary = summary + " ❤"

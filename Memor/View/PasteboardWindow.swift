@@ -16,7 +16,7 @@ class PasteboardWindow: NSWindowController, Observer {
     var viewModel: PasteboardWindowViewModel!
     
     override var windowNibName : NSNib.Name! {
-        return NSNib.Name(rawValue: "PasteboardWindow")
+        return NSNib.Name("PasteboardWindow")
     }
     
     override func showWindow(_ sender: Any?) {
@@ -40,9 +40,12 @@ class PasteboardWindow: NSWindowController, Observer {
 //        }
     }
     
-    init(viewModel: PasteboardWindowViewModel) {
-        self.viewModel = viewModel
+    init() {
         super.init(window: nil)
+    }
+    
+    func setup(viewModel: PasteboardWindowViewModel) {
+        self.viewModel = viewModel
         self.viewModel.attach(observer: self)
     }
     
@@ -51,7 +54,6 @@ class PasteboardWindow: NSWindowController, Observer {
     }
     
     override func keyDown(with event: NSEvent) {
-        print(event.keyCode)
         if (event.keyCode == 123) { // Left arrow
             viewModel.decrementPasteboardIndex()
         } else if (event.keyCode == 124) { // Right arrow
